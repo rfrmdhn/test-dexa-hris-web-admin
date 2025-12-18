@@ -1,20 +1,28 @@
-import React from 'react';
-import { twMerge } from 'tailwind-merge';
-import clsx from 'clsx';
+/**
+ * Card atom - updated to use cn utility
+ */
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+import React from 'react';
+import { cn } from '@/libs/utils';
+
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     variant?: 'default' | 'outline';
 }
 
-export const Card: React.FC<CardProps> = ({ className, variant = 'default', children, ...props }) => {
+export const Card: React.FC<CardProps> = ({
+    className,
+    variant = 'default',
+    children,
+    ...props
+}) => {
     return (
         <div
-            className={twMerge(clsx(
-                "rounded-xl p-6 transition-all", // Base styles
-                variant === 'default' && "bg-white dark:bg-gray-800 shadow-sm",
-                variant === 'outline' && "border border-gray-200 dark:border-gray-700",
-                className // User override
-            ))}
+            className={cn(
+                'rounded-xl p-6 transition-all',
+                variant === 'default' && 'bg-surface shadow-md',
+                variant === 'outline' && 'border border-border bg-surface',
+                className
+            )}
             {...props}
         >
             {children}

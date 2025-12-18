@@ -1,21 +1,73 @@
-import { Routes, Route } from 'react-router-dom'
-import { Card } from '@/components/atoms/Card'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { ProtectedRoute } from '@/routes';
+
+import { LoginPage } from '@/features/auth/pages';
+
+import { DashboardPage } from '@/features/dashboard/pages';
+
+import {
+  EmployeeListPage,
+  EmployeeCreatePage,
+  EmployeeEditPage,
+} from '@/features/employees/pages';
+
+import { AttendancePage } from '@/features/attendance/pages';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8 flex items-center justify-center">
-      <Routes>
-        <Route path="/" element={
-          <Card className="max-w-md w-full">
-            <h1 className="text-2xl font-bold text-primary mb-4">Web Admin Scaffolding</h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Project structure initialized successfully.
-            </p>
-          </Card>
-        } />
-      </Routes>
-    </div>
-  )
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/employees"
+        element={
+          <ProtectedRoute>
+            <EmployeeListPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/employees/create"
+        element={
+          <ProtectedRoute>
+            <EmployeeCreatePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/employees/:id/edit"
+        element={
+          <ProtectedRoute>
+            <EmployeeEditPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/attendance"
+        element={
+          <ProtectedRoute>
+            <AttendancePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
