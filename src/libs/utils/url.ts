@@ -2,24 +2,22 @@
  * URL Utilities
  */
 
+import { ATTENDANCE_SERVICE_URL } from '@/libs/api/client';
+
 /**
  * Get absolute URL for photo/file
- * Handles relative paths by prepending API origin
+ * Handles relative paths by prepending Attendance Service origin
+ * Files are stored and served by the attendance service
  */
 export const getAbsolutePhotoUrl = (path: string | null | undefined): string | null => {
     if (!path) return null;
     if (path.startsWith('http')) return path;
 
-    // Get base URL from environment or default
-    // We want the origin (http://localhost:3000) not the API path (http://localhost:3000/api)
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
-    let origin = apiUrl;
+    let origin = ATTENDANCE_SERVICE_URL;
     try {
-        origin = new URL(apiUrl).origin;
+        origin = new URL(ATTENDANCE_SERVICE_URL).origin;
     } catch (e) {
-        // Fallback if invalid URL
-        origin = 'http://localhost:3000';
+        origin = 'http://localhost:3002';
     }
 
     return `${origin}${path.startsWith('/') ? '' : '/'}${path}`;
