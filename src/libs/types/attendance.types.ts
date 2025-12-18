@@ -16,6 +16,6 @@ export interface Attendance {
 
 export interface AttendanceQueryParams extends PaginationParams {
     userId?: string;
-    startDate?: string; // ISO 8601 format
-    endDate?: string;   // ISO 8601 format
+    startDate?: string;
+    endDate?: string;
 }

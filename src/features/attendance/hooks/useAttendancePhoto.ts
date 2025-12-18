@@ -12,7 +12,7 @@ export function useAttendancePhoto(photoUrl: string | null) {
             return URL.createObjectURL(response.data);
         },
         enabled: !!photoUrl,
-        staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-        gcTime: 10 * 60 * 1000,   // Keep in cache for 10 minutes (formerly cacheTime)
+        staleTime: 5 * 60 * 1000,
+        gcTime: 10 * 60 * 1000,
     });
 }

@@ -142,6 +142,7 @@ export const AttendanceTable: React.FC<AttendanceTableProps> = ({
                         size="sm"
                         onClick={() => setPreviewPhoto(photoUrl)}
                         title="View photo"
+                        aria-label="View check-in photo"
                     >
                         <Icon name="photo_camera" size="sm" className="text-primary" />
                     </Button>

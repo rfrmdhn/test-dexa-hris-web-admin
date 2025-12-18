@@ -23,7 +23,7 @@ const setupInterceptors = (instance: typeof apiClient) => {
         (res) => res,
         (err) => {
             if (err.response?.status === 401) {
-                useAuthStore.getState().logout(); // Auto logout
+                useAuthStore.getState().logout();
             }
             return Promise.reject(err);
         }
