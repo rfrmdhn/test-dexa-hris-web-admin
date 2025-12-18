@@ -36,7 +36,7 @@ export function useLogin(options?: UseLoginOptions) {
             options?.onSuccess?.();
 
             // Navigate to dashboard
-            navigate('/');
+            navigate('/dashboard');
         },
         onError: (error: Error) => {
             options?.onError?.(error);

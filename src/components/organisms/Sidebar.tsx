@@ -18,7 +18,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { label: 'Dashboard', icon: 'dashboard', path: '/' },
+    { label: 'Dashboard', icon: 'dashboard', path: '/dashboard' },
     { label: 'Employees', icon: 'group', path: '/employees' },
     { label: 'Attendance', icon: 'schedule', path: '/attendance' },
 ];
@@ -50,8 +50,8 @@ export const Sidebar: React.FC = () => {
                 <ul className="space-y-1">
                     {navItems.map((item) => {
                         const isActive =
-                            item.path === '/'
-                                ? location.pathname === '/'
+                            item.path === '/dashboard'
+                                ? location.pathname === '/dashboard'
                                 : location.pathname.startsWith(item.path);
 
                         return (

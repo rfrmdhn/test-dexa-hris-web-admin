@@ -28,9 +28,12 @@ function App() {
       {/* Public routes */}
       <Route path="/login" element={<LoginPage />} />
 
+      {/* Redirect root to dashboard */}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
       {/* Protected routes */}
       <Route
-        path="/"
+        path="/dashboard"
         element={
           <ProtectedRoute>
             <DashboardPage />
@@ -75,7 +78,7 @@ function App() {
       />
 
       {/* Catch all - redirect to dashboard */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
 }
