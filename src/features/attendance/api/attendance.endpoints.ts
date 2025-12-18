@@ -4,14 +4,14 @@
  */
 
 import apiClient from '@/libs/api/client';
-import type { ApiResponse, PaginatedData, Attendance, AttendanceQueryParams } from '@/libs/types';
+import type { PaginatedApiResponse, Attendance, AttendanceQueryParams } from '@/libs/types';
 
 export const attendanceApi = {
     /**
      * Get all attendance records with pagination and filters
      */
-    getAll: async (params?: AttendanceQueryParams): Promise<ApiResponse<PaginatedData<Attendance>>> => {
-        const response = await apiClient.get<ApiResponse<PaginatedData<Attendance>>>(
+    getAll: async (params?: AttendanceQueryParams): Promise<PaginatedApiResponse<Attendance>> => {
+        const response = await apiClient.get<PaginatedApiResponse<Attendance>>(
             '/attendance',
             { params }
         );

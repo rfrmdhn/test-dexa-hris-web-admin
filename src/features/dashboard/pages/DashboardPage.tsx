@@ -104,8 +104,8 @@ export const DashboardPage: React.FC = () => {
         endDate: today,
     });
 
-    const totalEmployees = employeesData?.meta?.totalItems ?? 0;
-    const todayAttendance = attendanceData?.meta?.totalItems ?? 0;
+    const totalEmployees = employeesData?.meta?.total ?? 0;
+    const todayAttendance = attendanceData?.meta?.total ?? 0;
 
     return (
         <DashboardLayout

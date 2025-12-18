@@ -22,18 +22,26 @@ export interface ApiErrorResponse {
   };
 }
 
-// Pagination metadata
+// Pagination metadata (matching backend)
 export interface PaginationMeta {
-  totalItems: number;
-  itemCount: number;
-  itemsPerPage: number;
+  total: number;
+  page: number;
+  limit: number;
   totalPages: number;
-  currentPage: number;
 }
 
-// Paginated data wrapper
+// Paginated data wrapper (Client side usage)
 export interface PaginatedData<T> {
   items: T[];
+  meta: PaginationMeta;
+}
+
+// Backend Response format for paginated data
+export interface PaginatedApiResponse<T> {
+  statusCode: number;
+  message: string;
+  success: boolean;
+  data: T[];
   meta: PaginationMeta;
 }
 

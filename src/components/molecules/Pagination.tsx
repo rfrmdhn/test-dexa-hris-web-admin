@@ -23,12 +23,15 @@ export const Pagination: React.FC<PaginationProps> = ({
     className,
     showPageInfo = true,
 }) => {
-    const { currentPage, totalPages, totalItems, itemCount, itemsPerPage } = meta;
+    const { page, totalPages, total, limit } = meta;
 
     // Calculate visible page numbers
     const pageNumbers = useMemo(() => {
         const pages: (number | 'ellipsis')[] = [];
         const maxVisiblePages = 5;
+
+        // Use page instead of currentPage
+        const currentPage = page;
 
         if (totalPages <= maxVisiblePages) {
             for (let i = 1; i <= totalPages; i++) pages.push(i);
@@ -59,11 +62,12 @@ export const Pagination: React.FC<PaginationProps> = ({
         }
 
         return pages;
-    }, [currentPage, totalPages]);
+    }, [page, totalPages]);
 
     // Calculate showing range
-    const startItem = totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
-    const endItem = Math.min(startItem + itemCount - 1, totalItems);
+    const startItem = total === 0 ? 0 : (page - 1) * limit + 1;
+    // Calculate endItem without itemCount, assuming full pages except maybe last, but bounded by total
+    const endItem = Math.min(startItem + limit - 1, total);
 
     if (totalPages <= 1 && !showPageInfo) return null;
 
@@ -71,7 +75,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         <div className={cn('flex items-center justify-between gap-4', className)}>
             {showPageInfo && (
                 <Text size="sm" variant="muted">
-                    Showing {startItem} to {endItem} of {totalItems} results
+                    Showing {startItem} to {endItem} of {total} results
                 </Text>
             )}
 
@@ -79,28 +83,28 @@ export const Pagination: React.FC<PaginationProps> = ({
                 <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => onPageChange(currentPage - 1)}
-                    disabled={currentPage <= 1}
+                    onClick={() => onPageChange(page - 1)}
+                    disabled={page <= 1}
                     aria-label="Previous page"
                 >
                     <Icon name="chevron_left" size="sm" />
                 </Button>
 
-                {pageNumbers.map((page, index) =>
-                    page === 'ellipsis' ? (
+                {pageNumbers.map((p, index) =>
+                    p === 'ellipsis' ? (
                         <span key={`ellipsis-${index}`} className="px-2 text-text-muted">
                             ...
                         </span>
                     ) : (
                         <Button
-                            key={page}
-                            variant={page === currentPage ? 'primary' : 'ghost'}
+                            key={p}
+                            variant={p === page ? 'primary' : 'ghost'}
                             size="sm"
-                            onClick={() => onPageChange(page)}
-                            aria-label={`Page ${page}`}
-                            aria-current={page === currentPage ? 'page' : undefined}
+                            onClick={() => onPageChange(p as number)}
+                            aria-label={`Page ${p}`}
+                            aria-current={p === page ? 'page' : undefined}
                         >
-                            {page}
+                            {p}
                         </Button>
                     )
                 )}
@@ -108,8 +112,8 @@ export const Pagination: React.FC<PaginationProps> = ({
                 <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => onPageChange(currentPage + 1)}
-                    disabled={currentPage >= totalPages}
+                    onClick={() => onPageChange(page + 1)}
+                    disabled={page >= totalPages}
                     aria-label="Next page"
                 >
                     <Icon name="chevron_right" size="sm" />

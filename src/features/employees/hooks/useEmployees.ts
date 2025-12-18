@@ -17,7 +17,10 @@ export function useEmployees(params?: EmployeeQueryParams) {
             if (!response.success) {
                 throw new Error(response.message || 'Failed to fetch employees');
             }
-            return response.data;
+            return {
+                items: response.data,
+                meta: response.meta,
+            };
         },
         placeholderData: keepPreviousData,
         staleTime: 30 * 1000, // 30 seconds

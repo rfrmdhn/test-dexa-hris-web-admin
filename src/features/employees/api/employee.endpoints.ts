@@ -6,7 +6,7 @@
 import apiClient from '@/libs/api/client';
 import type {
     ApiResponse,
-    PaginatedData,
+    PaginatedApiResponse,
     Employee,
     EmployeeQueryParams,
     CreateEmployeeDto,
@@ -17,8 +17,8 @@ export const employeeApi = {
     /**
      * Get all employees with pagination and filters
      */
-    getAll: async (params?: EmployeeQueryParams): Promise<ApiResponse<PaginatedData<Employee>>> => {
-        const response = await apiClient.get<ApiResponse<PaginatedData<Employee>>>(
+    getAll: async (params?: EmployeeQueryParams): Promise<PaginatedApiResponse<Employee>> => {
+        const response = await apiClient.get<PaginatedApiResponse<Employee>>(
             '/employees',
             { params }
         );

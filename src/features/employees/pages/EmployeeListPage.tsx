@@ -86,11 +86,10 @@ export const EmployeeListPage: React.FC = () => {
     const meta = useMemo(
         () =>
             data?.meta ?? {
-                totalItems: 0,
-                itemCount: 0,
-                itemsPerPage: 10,
+                total: 0,
+                page: 1,
+                limit: 10,
                 totalPages: 1,
-                currentPage: 1,
             },
         [data]
     );
@@ -98,7 +97,7 @@ export const EmployeeListPage: React.FC = () => {
     return (
         <DashboardLayout
             title="Employees"
-            subtitle={`${meta.totalItems} total employees`}
+            subtitle={`${meta.total} total employees`}
             actions={
                 <Button onClick={() => navigate('/employees/create')} leftIcon={<Icon name="add" size="sm" />}>
                     Add Employee
@@ -140,7 +139,7 @@ export const EmployeeListPage: React.FC = () => {
                 />
 
                 {/* Pagination */}
-                {meta.totalPages > 1 && (
+                {meta.total > 0 && (
                     <div className="mt-6 pt-6 border-t border-border">
                         <Pagination meta={meta} onPageChange={handlePageChange} />
                     </div>
