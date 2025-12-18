@@ -16,8 +16,8 @@ export const getAbsolutePhotoUrl = (path: string | null | undefined): string | n
     let origin = ATTENDANCE_SERVICE_URL;
     try {
         origin = new URL(ATTENDANCE_SERVICE_URL).origin;
-    } catch (e) {
-        origin = 'http://localhost:3002';
+    } catch {
+        // Use the raw value if URL parsing fails
     }
 
     return `${origin}${path.startsWith('/') ? '' : '/'}${path}`;
