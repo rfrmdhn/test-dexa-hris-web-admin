@@ -39,11 +39,6 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, className }) =
             >
                 {children}
             </div>
-
-            {/* Footer */}
-            <Text size="sm" variant="muted" className="mt-8">
-                © {new Date().getFullYear()} HRIS Admin. All rights reserved.
-            </Text>
         </div>
     );
 };
