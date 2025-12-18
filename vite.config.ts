@@ -9,6 +9,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  envPrefix: ['VITE_', 'AUTH_', 'ATTENDANCE_'],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

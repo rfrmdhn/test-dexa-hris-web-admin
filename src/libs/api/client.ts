@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
 // Service URLs
-export const AUTH_SERVICE_URL = import.meta.env.VITE_AUTH_SERVICE_URL || 'http://localhost:3001';
-export const ATTENDANCE_SERVICE_URL = import.meta.env.VITE_ATTENDANCE_SERVICE_URL || 'http://localhost:3002';
+export const AUTH_SERVICE_URL = import.meta.env.AUTH_SERVICE_URL || 'http://localhost:3001';
+export const ATTENDANCE_SERVICE_URL = import.meta.env.ATTENDANCE_SERVICE_URL || 'http://localhost:3002';
 
 const apiClient = axios.create({
     baseURL: AUTH_SERVICE_URL,
