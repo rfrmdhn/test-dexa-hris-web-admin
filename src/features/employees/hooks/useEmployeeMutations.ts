@@ -14,23 +14,13 @@ interface MutationOptions {
     onError?: (error: Error) => void;
 }
 
-/**
- * Create employee mutation
- */
 export function useCreateEmployee(options?: MutationOptions) {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     return useMutation({
-        mutationFn: async (data: CreateEmployeeDto) => {
-            const response = await employeeApi.create(data);
-            if (!response.success) {
-                throw new Error(response.message || 'Failed to create employee');
-            }
-            return response.data;
-        },
+        mutationFn: (data: CreateEmployeeDto) => employeeApi.create(data),
         onSuccess: () => {
-            // Invalidate list cache
             queryClient.invalidateQueries({ queryKey: [EMPLOYEES_QUERY_KEY] });
             options?.onSuccess?.();
             navigate('/employees');
@@ -41,23 +31,14 @@ export function useCreateEmployee(options?: MutationOptions) {
     });
 }
 
-/**
- * Update employee mutation
- */
 export function useUpdateEmployee(options?: MutationOptions) {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     return useMutation({
-        mutationFn: async ({ id, data }: { id: string; data: UpdateEmployeeDto }) => {
-            const response = await employeeApi.update(id, data);
-            if (!response.success) {
-                throw new Error(response.message || 'Failed to update employee');
-            }
-            return response.data;
-        },
+        mutationFn: ({ id, data }: { id: string; data: UpdateEmployeeDto }) =>
+            employeeApi.update(id, data),
         onSuccess: (_, variables) => {
-            // Invalidate list and detail cache
             queryClient.invalidateQueries({ queryKey: [EMPLOYEES_QUERY_KEY] });
             queryClient.invalidateQueries({ queryKey: [EMPLOYEES_QUERY_KEY, variables.id] });
             options?.onSuccess?.();
@@ -69,22 +50,12 @@ export function useUpdateEmployee(options?: MutationOptions) {
     });
 }
 
-/**
- * Delete employee mutation
- */
 export function useDeleteEmployee(options?: MutationOptions) {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async (id: string) => {
-            const response = await employeeApi.delete(id);
-            if (!response.success) {
-                throw new Error(response.message || 'Failed to delete employee');
-            }
-            return response.data;
-        },
+        mutationFn: (id: string) => employeeApi.delete(id),
         onSuccess: () => {
-            // Invalidate list cache
             queryClient.invalidateQueries({ queryKey: [EMPLOYEES_QUERY_KEY] });
             options?.onSuccess?.();
         },
