@@ -12,7 +12,7 @@ export const authApi = {
      */
     login: async (payload: LoginPayload): Promise<ApiResponse<LoginResponseData>> => {
         const response = await apiClient.post<ApiResponse<LoginResponseData>>(
-            '/auth/login',
+            '/auth/login', // apiClient has baseURL set to AUTH_SERVICE_URL by default now
             payload
         );
         return response.data;

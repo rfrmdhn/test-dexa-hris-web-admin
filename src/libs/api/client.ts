@@ -1,24 +1,37 @@
 import axios from 'axios';
 import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
+// Service URLs
+export const AUTH_SERVICE_URL = import.meta.env.VITE_AUTH_SERVICE_URL || 'http://localhost:3001';
+export const ATTENDANCE_SERVICE_URL = import.meta.env.VITE_ATTENDANCE_SERVICE_URL || 'http://localhost:3002';
+
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+    baseURL: AUTH_SERVICE_URL,
 });
 
-apiClient.interceptors.request.use((config) => {
-    const token = useAuthStore.getState().token;
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
+export const attendanceApiClient = axios.create({
+    baseURL: ATTENDANCE_SERVICE_URL,
 });
 
-apiClient.interceptors.response.use(
-    (res) => res,
-    (err) => {
-        if (err.response?.status === 401) {
-            useAuthStore.getState().logout(); // Auto logout
+const setupInterceptors = (instance: typeof apiClient) => {
+    instance.interceptors.request.use((config) => {
+        const token = useAuthStore.getState().token;
+        if (token) config.headers.Authorization = `Bearer ${token}`;
+        return config;
+    });
+
+    instance.interceptors.response.use(
+        (res) => res,
+        (err) => {
+            if (err.response?.status === 401) {
+                useAuthStore.getState().logout(); // Auto logout
+            }
+            return Promise.reject(err);
         }
-        return Promise.reject(err);
-    }
-);
+    );
+};
+
+setupInterceptors(apiClient);
+setupInterceptors(attendanceApiClient);
 
 export default apiClient;
