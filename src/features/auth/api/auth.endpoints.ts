@@ -12,7 +12,7 @@ export const authApi = {
      */
     login: async (payload: LoginPayload): Promise<ApiResponse<LoginResponseData>> => {
         const response = await apiClient.post<ApiResponse<LoginResponseData>>(
-            '/api/auth/login',
+            '/auth/login',
             payload
         );
         return response.data;

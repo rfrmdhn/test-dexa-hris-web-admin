@@ -19,7 +19,7 @@ export const employeeApi = {
      */
     getAll: async (params?: EmployeeQueryParams): Promise<ApiResponse<PaginatedData<Employee>>> => {
         const response = await apiClient.get<ApiResponse<PaginatedData<Employee>>>(
-            '/api/employees',
+            '/employees',
             { params }
         );
         return response.data;
@@ -30,7 +30,7 @@ export const employeeApi = {
      */
     getById: async (id: string): Promise<ApiResponse<Employee>> => {
         const response = await apiClient.get<ApiResponse<Employee>>(
-            `/api/employees/${id}`
+            `/employees/${id}`
         );
         return response.data;
     },
@@ -40,7 +40,7 @@ export const employeeApi = {
      */
     create: async (data: CreateEmployeeDto): Promise<ApiResponse<Employee>> => {
         const response = await apiClient.post<ApiResponse<Employee>>(
-            '/api/employees',
+            '/employees',
             data
         );
         return response.data;
@@ -51,7 +51,7 @@ export const employeeApi = {
      */
     update: async (id: string, data: UpdateEmployeeDto): Promise<ApiResponse<Employee>> => {
         const response = await apiClient.patch<ApiResponse<Employee>>(
-            `/api/employees/${id}`,
+            `/employees/${id}`,
             data
         );
         return response.data;
@@ -62,7 +62,7 @@ export const employeeApi = {
      */
     delete: async (id: string): Promise<ApiResponse<null>> => {
         const response = await apiClient.delete<ApiResponse<null>>(
-            `/api/employees/${id}`
+            `/employees/${id}`
         );
         return response.data;
     },

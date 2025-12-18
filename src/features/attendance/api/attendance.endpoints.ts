@@ -12,7 +12,7 @@ export const attendanceApi = {
      */
     getAll: async (params?: AttendanceQueryParams): Promise<ApiResponse<PaginatedData<Attendance>>> => {
         const response = await apiClient.get<ApiResponse<PaginatedData<Attendance>>>(
-            '/api/attendance',
+            '/attendance',
             { params }
         );
         return response.data;
