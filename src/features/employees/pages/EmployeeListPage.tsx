@@ -141,7 +141,11 @@ export const EmployeeListPage: React.FC = () => {
                 {/* Pagination */}
                 {meta.total > 0 && (
                     <div className="mt-6 pt-6 border-t border-border">
-                        <Pagination meta={meta} onPageChange={handlePageChange} />
+                        <Pagination
+                            meta={meta}
+                            onPageChange={handlePageChange}
+                            onLimitChange={(limit) => setParams(prev => ({ ...prev, limit, page: 1 }))}
+                        />
                     </div>
                 )}
             </Card>

@@ -10,16 +10,27 @@ import { Icon } from '@/components/atoms/Icon';
 import { Text } from '@/components/atoms/Typography';
 import type { PaginationMeta } from '@/libs/types';
 
+import { Select, type SelectOption } from '@/components/molecules/Select';
+
 export interface PaginationProps {
     meta: PaginationMeta;
     onPageChange: (page: number) => void;
+    onLimitChange?: (limit: number) => void;
     className?: string;
     showPageInfo?: boolean;
 }
 
+const limitOptions: SelectOption[] = [
+    { value: '10', label: '10 / page' },
+    { value: '20', label: '20 / page' },
+    { value: '50', label: '50 / page' },
+    { value: '100', label: '100 / page' },
+];
+
 export const Pagination: React.FC<PaginationProps> = ({
     meta,
     onPageChange,
+    onLimitChange,
     className,
     showPageInfo = true,
 }) => {
@@ -77,6 +88,17 @@ export const Pagination: React.FC<PaginationProps> = ({
                 <Text size="sm" variant="muted">
                     Showing {startItem} to {endItem} of {total} results
                 </Text>
+            )}
+
+            {onLimitChange && (
+                <div className="w-32">
+                    <Select
+                        options={limitOptions}
+                        value={String(limit)}
+                        onChange={(e) => onLimitChange(Number(e.target.value))}
+                        size="sm"
+                    />
+                </div>
             )}
 
             <div className="flex items-center gap-1">
