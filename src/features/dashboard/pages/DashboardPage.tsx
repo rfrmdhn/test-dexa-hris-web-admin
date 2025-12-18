@@ -1,6 +1,6 @@
 /**
  * DashboardPage
- * Main dashboard with statistics and quick links
+ * Main dashboard with quick links
  */
 
 import React from 'react';
@@ -10,46 +10,6 @@ import { Card } from '@/components/atoms/Card';
 import { Button } from '@/components/atoms/Button';
 import { Icon } from '@/components/atoms/Icon';
 import { Heading, Text } from '@/components/atoms/Typography';
-import { Spinner } from '@/components/atoms/Spinner';
-import { useEmployees } from '@/features/employees/hooks';
-import { useAttendance } from '@/features/attendance/hooks';
-import { getTodayISO } from '@/libs/utils';
-
-interface StatCardProps {
-    title: string;
-    value: string | number;
-    icon: string;
-    iconColor: string;
-    iconBg: string;
-    loading?: boolean;
-}
-
-const StatCard: React.FC<StatCardProps> = ({
-    title,
-    value,
-    icon,
-    iconColor,
-    iconBg,
-    loading,
-}) => (
-    <Card className="flex items-center gap-4">
-        <div className={`p-3 rounded-xl ${iconBg}`}>
-            <Icon name={icon} size="lg" className={iconColor} />
-        </div>
-        <div>
-            <Text size="sm" variant="muted" className="mb-1">
-                {title}
-            </Text>
-            {loading ? (
-                <Spinner size="sm" />
-            ) : (
-                <Heading as="h3" className="text-2xl">
-                    {value}
-                </Heading>
-            )}
-        </div>
-    </Card>
-);
 
 interface QuickLinkProps {
     title: string;
@@ -94,58 +54,11 @@ const QuickLinkCard: React.FC<QuickLinkProps> = ({
 };
 
 export const DashboardPage: React.FC = () => {
-    const today = getTodayISO();
-
-    // Fetch stats
-    const { data: employeesData, isLoading: loadingEmployees } = useEmployees({ limit: 1 });
-    const { data: attendanceData, isLoading: loadingAttendance } = useAttendance({
-        limit: 1,
-        startDate: today,
-        endDate: today,
-    });
-
-    const totalEmployees = employeesData?.meta?.total ?? 0;
-    const todayAttendance = attendanceData?.meta?.total ?? 0;
-
     return (
         <DashboardLayout
             title="Dashboard"
             subtitle="Welcome back to HRIS Admin"
         >
-            {/* Stats */}
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-                <StatCard
-                    title="Total Employees"
-                    value={totalEmployees}
-                    icon="group"
-                    iconColor="text-primary"
-                    iconBg="bg-primary-light"
-                    loading={loadingEmployees}
-                />
-                <StatCard
-                    title="Today's Check-ins"
-                    value={todayAttendance}
-                    icon="login"
-                    iconColor="text-success"
-                    iconBg="bg-success-light"
-                    loading={loadingAttendance}
-                />
-                <StatCard
-                    title="Admin Users"
-                    value="-"
-                    icon="admin_panel_settings"
-                    iconColor="text-warning"
-                    iconBg="bg-warning-light"
-                />
-                <StatCard
-                    title="Active Today"
-                    value="-"
-                    icon="trending_up"
-                    iconColor="text-info"
-                    iconBg="bg-info-light"
-                />
-            </div>
-
             {/* Quick Links */}
             <div className="mb-6">
                 <Heading as="h3" className="mb-4">
