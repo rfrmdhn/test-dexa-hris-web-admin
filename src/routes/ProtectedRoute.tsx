@@ -16,12 +16,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const location = useLocation();
     const { isAuthenticated, user } = useAuthStore();
 
-    // Not authenticated - redirect to login
     if (!isAuthenticated || !user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
-    // Not admin - show access denied
     if (user.role !== 'ADMIN') {
         return (
             <div className="min-h-screen bg-background flex items-center justify-center p-4">

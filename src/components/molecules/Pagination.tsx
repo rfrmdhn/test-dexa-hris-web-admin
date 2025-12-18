@@ -36,25 +36,21 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
     const { page, totalPages, total, limit } = meta;
 
-    // Calculate visible page numbers
     const pageNumbers = useMemo(() => {
         const pages: (number | 'ellipsis')[] = [];
         const maxVisiblePages = 5;
 
-        // Use page instead of currentPage
         const currentPage = page;
 
         if (totalPages <= maxVisiblePages) {
             for (let i = 1; i <= totalPages; i++) pages.push(i);
         } else {
-            // Always show first page
             pages.push(1);
 
             if (currentPage > 3) {
                 pages.push('ellipsis');
             }
 
-            // Show pages around current
             const start = Math.max(2, currentPage - 1);
             const end = Math.min(totalPages - 1, currentPage + 1);
 
@@ -66,7 +62,6 @@ export const Pagination: React.FC<PaginationProps> = ({
                 pages.push('ellipsis');
             }
 
-            // Always show last page
             if (!pages.includes(totalPages)) {
                 pages.push(totalPages);
             }
@@ -75,9 +70,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         return pages;
     }, [page, totalPages]);
 
-    // Calculate showing range
     const startItem = total === 0 ? 0 : (page - 1) * limit + 1;
-    // Calculate endItem without itemCount, assuming full pages except maybe last, but bounded by total
     const endItem = Math.min(startItem + limit - 1, total);
 
     if (totalPages <= 1 && !showPageInfo) return null;

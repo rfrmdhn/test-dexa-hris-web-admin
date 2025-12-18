@@ -9,21 +9,12 @@ import type {
     EmployeeQueryParams,
     CreateEmployeeDto,
     UpdateEmployeeDto,
+    PaginatedApiResponse,
 } from '@/libs/types';
 
-interface PaginatedResponse<T> {
-    data: T[];
-    meta: {
-        total: number;
-        page: number;
-        limit: number;
-        totalPages: number;
-    };
-}
-
 export const employeeApi = {
-    getAll: async (params?: EmployeeQueryParams): Promise<PaginatedResponse<Employee>> => {
-        const response = await apiClient.get<PaginatedResponse<Employee>>(
+    getAll: async (params?: EmployeeQueryParams): Promise<PaginatedApiResponse<Employee>> => {
+        const response = await apiClient.get<PaginatedApiResponse<Employee>>(
             '/employees',
             { params }
         );

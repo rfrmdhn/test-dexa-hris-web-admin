@@ -26,7 +26,6 @@ const roleFilterOptions: SelectOption[] = [
 export const EmployeeListPage: React.FC = () => {
     const navigate = useNavigate();
 
-    // Query params state
     const [params, setParams] = useState<EmployeeQueryParams>({
         page: 1,
         limit: 10,
@@ -34,13 +33,10 @@ export const EmployeeListPage: React.FC = () => {
         sortOrder: 'desc',
     });
 
-    // Delete confirmation state
     const [deleteTarget, setDeleteTarget] = useState<Employee | null>(null);
 
-    // Fetch employees
     const { data, isLoading, error } = useEmployees(params);
 
-    // Delete mutation
     const { mutate: deleteEmployee, isPending: isDeleting } = useDeleteEmployee({
         onSuccess: () => setDeleteTarget(null),
         onError: (err) => {
@@ -49,7 +45,6 @@ export const EmployeeListPage: React.FC = () => {
         },
     });
 
-    // Handlers
     const handleSearch = useCallback((search: string) => {
         setParams((prev) => ({ ...prev, search: search || undefined, page: 1 }));
     }, []);
@@ -81,7 +76,6 @@ export const EmployeeListPage: React.FC = () => {
         }
     }, [deleteTarget, deleteEmployee]);
 
-    // Memoized values
     const employees = useMemo(() => data?.items ?? [], [data]);
     const meta = useMemo(
         () =>

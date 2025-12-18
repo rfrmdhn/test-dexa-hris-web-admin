@@ -45,7 +45,6 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         }
     }, [isOpen]);
 
-    // Handle escape key
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && isOpen && !isLoading) {

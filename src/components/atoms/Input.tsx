@@ -35,18 +35,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 <input
                     ref={ref}
                     className={cn(
-                        // Base styles
                         'w-full rounded-lg border bg-surface text-text-primary',
                         'placeholder:text-text-muted',
                         'transition-all duration-150 ease-in-out',
                         'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-0 focus:border-primary',
                         'disabled:bg-secondary-light disabled:text-text-muted disabled:cursor-not-allowed',
-                        // Size
                         sizeStyles[size],
-                        // Icon padding
                         hasLeftIcon && 'pl-10',
                         hasRightIcon && 'pr-10',
-                        // States
                         error
                             ? 'border-danger focus:ring-danger focus:border-danger'
                             : 'border-border hover:border-border-hover',

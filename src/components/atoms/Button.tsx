@@ -45,12 +45,10 @@ export const Button: React.FC<ButtonProps> = ({
     return (
         <button
             className={cn(
-                // Base styles
                 'inline-flex items-center justify-center font-medium rounded-lg',
                 'transition-all duration-150 ease-in-out',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
                 'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
-                // Applied variants
                 variantStyles[variant],
                 sizeStyles[size],
                 className

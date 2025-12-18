@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '@/features/auth/stores/useAuthStore';
 
-// Service URLs from environment variables (required)
 export const AUTH_SERVICE_URL = import.meta.env.AUTH_SERVICE_URL;
 export const ATTENDANCE_SERVICE_URL = import.meta.env.ATTENDANCE_SERVICE_URL;
 

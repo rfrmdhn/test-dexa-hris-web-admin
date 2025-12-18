@@ -6,7 +6,6 @@
 import React from 'react';
 import { cn } from '@/libs/utils';
 
-// Heading Component
 export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
     as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
@@ -36,7 +35,6 @@ export const Heading: React.FC<HeadingProps> = ({
     );
 };
 
-// Text Component
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
     size?: 'xs' | 'sm' | 'base' | 'lg';
     variant?: 'default' | 'muted' | 'secondary';
@@ -74,7 +72,6 @@ export const Text: React.FC<TextProps> = ({
     );
 };
 
-// Label Component
 export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
     required?: boolean;
 }

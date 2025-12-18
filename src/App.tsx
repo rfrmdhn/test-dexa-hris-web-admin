@@ -6,20 +6,16 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from '@/routes';
 
-// Auth
 import { LoginPage } from '@/features/auth/pages';
 
-// Dashboard
 import { DashboardPage } from '@/features/dashboard/pages';
 
-// Employees
 import {
   EmployeeListPage,
   EmployeeCreatePage,
   EmployeeEditPage,
 } from '@/features/employees/pages';
 
-// Attendance
 import { AttendancePage } from '@/features/attendance/pages';
 
 function App() {

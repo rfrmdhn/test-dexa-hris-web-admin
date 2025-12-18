@@ -19,10 +19,8 @@ export const EmployeeEditPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [error, setError] = useState<string | null>(null);
 
-    // Fetch employee
     const { data: employee, isLoading: isFetching, error: fetchError } = useEmployee(id);
 
-    // Update mutation
     const { mutate: updateEmployee, isPending: isUpdating } = useUpdateEmployee({
         onError: (err) => {
             setError(err.message || 'Failed to update employee');
@@ -35,7 +33,6 @@ export const EmployeeEditPage: React.FC = () => {
         updateEmployee({ id, data });
     };
 
-    // Loading state
     if (isFetching) {
         return (
             <DashboardLayout title="Edit Employee">
@@ -46,7 +43,6 @@ export const EmployeeEditPage: React.FC = () => {
         );
     }
 
-    // Error state
     if (fetchError || !employee) {
         return (
             <DashboardLayout title="Edit Employee">

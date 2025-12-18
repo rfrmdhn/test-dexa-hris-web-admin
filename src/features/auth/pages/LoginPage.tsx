@@ -14,7 +14,6 @@ export const LoginPage: React.FC = () => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     const user = useAuthStore((state) => state.user);
 
-    // Redirect if already authenticated as admin
     useEffect(() => {
         if (isAuthenticated && user?.role === 'ADMIN') {
             navigate('/', { replace: true });

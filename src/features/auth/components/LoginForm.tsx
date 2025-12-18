@@ -26,7 +26,6 @@ export const LoginForm: React.FC = () => {
         e.preventDefault();
         setError(null);
 
-        // Basic validation
         if (!email || !password) {
             setError('Please enter both email and password');
             return;

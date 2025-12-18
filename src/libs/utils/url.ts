@@ -17,7 +17,6 @@ export const getAbsolutePhotoUrl = (path: string | null | undefined): string | n
     try {
         origin = new URL(ATTENDANCE_SERVICE_URL).origin;
     } catch {
-        // Use the raw value if URL parsing fails
     }
 
     return `${origin}${path.startsWith('/') ? '' : '/'}${path}`;

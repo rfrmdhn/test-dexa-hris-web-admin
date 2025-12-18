@@ -5,7 +5,6 @@
 
 import type { PaginationParams, User } from './api.types';
 
-// Attendance entity with user relation
 export interface Attendance {
     id: string;
     userId: string;
@@ -15,7 +14,6 @@ export interface Attendance {
     checkOutTime: string | null;
 }
 
-// Query parameters for attendance list
 export interface AttendanceQueryParams extends PaginationParams {
     userId?: string;
     startDate?: string; // ISO 8601 format

@@ -19,7 +19,6 @@ const sizeStyles: Record<NonNullable<AvatarProps['size']>, string> = {
     lg: 'h-12 w-12 text-base',
 };
 
-// Generate a consistent color based on name
 const getColorFromName = (name: string): string => {
     const colors = [
         'bg-blue-500',
@@ -40,7 +39,6 @@ const getColorFromName = (name: string): string => {
     return colors[Math.abs(hash) % colors.length];
 };
 
-// Get initials from name
 const getInitials = (name: string): string => {
     const parts = name.trim().split(/\s+/);
     if (parts.length >= 2) {
@@ -74,7 +72,6 @@ export const Avatar: React.FC<AvatarProps> = ({
                     alt={name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                        // Hide image on error to show initials fallback
                         (e.target as HTMLImageElement).style.display = 'none';
                     }}
                 />

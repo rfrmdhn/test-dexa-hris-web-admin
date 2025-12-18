@@ -5,6 +5,7 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import { cn } from '@/libs/utils';
+import { useDebounce } from '@/libs/hooks';
 import { Input } from '@/components/atoms/Input';
 import { Icon } from '@/components/atoms/Icon';
 
@@ -24,22 +25,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     className,
 }) => {
     const [internalValue, setInternalValue] = useState(externalValue);
+    const debouncedValue = useDebounce(internalValue, debounceMs);
 
-    // Sync with external value
     useEffect(() => {
-        setInternalValue(externalValue);
+        if (externalValue !== debouncedValue) {
+            setInternalValue(externalValue);
+        }
     }, [externalValue]);
 
-    // Debounced onChange
     useEffect(() => {
-        const handler = setTimeout(() => {
-            if (internalValue !== externalValue) {
-                onChange(internalValue);
-            }
-        }, debounceMs);
-
-        return () => clearTimeout(handler);
-    }, [internalValue, debounceMs, onChange, externalValue]);
+        if (debouncedValue !== externalValue) {
+            onChange(debouncedValue);
+        }
+    }, [debouncedValue, onChange, externalValue]);
 
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setInternalValue(e.target.value);

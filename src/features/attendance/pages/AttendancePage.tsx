@@ -19,10 +19,8 @@ import { getTodayISO } from '@/libs/utils';
 import type { AttendanceQueryParams } from '@/libs/types';
 
 export const AttendancePage: React.FC = () => {
-    // Get today's date for default filter
     const today = getTodayISO();
 
-    // Query params state
     const [params, setParams] = useState<AttendanceQueryParams>({
         page: 1,
         limit: 10,
@@ -32,13 +30,10 @@ export const AttendancePage: React.FC = () => {
         endDate: today,
     });
 
-    // Fetch attendance
     const { data, isLoading, error } = useAttendance(params);
 
-    // Fetch employees for filter dropdown
     const { data: employeesData } = useEmployees({ limit: 100 });
 
-    // Build employee options
     const employeeOptions: SelectOption[] = useMemo(() => {
         const options: SelectOption[] = [{ value: '', label: 'All Employees' }];
         if (employeesData?.items) {
@@ -49,7 +44,6 @@ export const AttendancePage: React.FC = () => {
         return options;
     }, [employeesData]);
 
-    // Handlers
     const handleEmployeeFilter = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
         setParams((prev) => ({
             ...prev,
@@ -86,7 +80,6 @@ export const AttendancePage: React.FC = () => {
         setParams((prev) => ({ ...prev, page }));
     }, []);
 
-    // Memoized values
     const attendance = useMemo(() => data?.items ?? [], [data]);
     const meta = useMemo(
         () =>

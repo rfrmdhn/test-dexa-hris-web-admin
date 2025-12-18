@@ -29,13 +29,10 @@ export function useLogin(options?: UseLoginOptions) {
             return data;
         },
         onSuccess: (data) => {
-            // Store auth data
             login(data.access_token, data.user);
 
-            // Custom callback
             options?.onSuccess?.();
 
-            // Navigate to dashboard
             navigate('/dashboard');
         },
         onError: (error: Error) => {

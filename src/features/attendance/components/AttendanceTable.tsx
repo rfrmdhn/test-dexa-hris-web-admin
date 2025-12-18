@@ -20,53 +20,13 @@ interface AttendanceTableProps {
     onSort?: (key: string) => void;
 }
 
-// Simple photo preview modal
+import { useAttendancePhoto } from '@/features/attendance/hooks/useAttendancePhoto';
+
 const PhotoModal: React.FC<{ photoUrl: string | null; onClose: () => void }> = ({
     photoUrl,
     onClose,
 }) => {
-    const [blobUrl, setBlobUrl] = React.useState<string | null>(null);
-    const [loading, setLoading] = React.useState(false);
-    const [error, setError] = React.useState<string | null>(null);
-
-    React.useEffect(() => {
-        if (!photoUrl) return;
-
-        let active = true;
-        const fetchImage = async () => {
-            try {
-                setLoading(true);
-                setError(null);
-                // Use fetch with auth header since apiClient might be strictly for JSON API
-                // But we can use apiClient if we set responseType to blob
-                // However, importing apiClient here directly is better
-                const { default: apiClient } = await import('@/libs/api/client');
-
-                const response = await apiClient.get(photoUrl, {
-                    responseType: 'blob'
-                });
-
-                if (active) {
-                    const url = URL.createObjectURL(response.data);
-                    setBlobUrl(url);
-                }
-            } catch (err) {
-                if (active) {
-                    console.error('Failed to load image', err);
-                    setError('Failed to load image');
-                }
-            } finally {
-                if (active) setLoading(false);
-            }
-        };
-
-        fetchImage();
-
-        return () => {
-            active = false;
-            if (blobUrl) URL.revokeObjectURL(blobUrl);
-        };
-    }, [photoUrl]);
+    const { data: blobUrl, isLoading: loading, error } = useAttendancePhoto(photoUrl);
 
     if (!photoUrl) return null;
 
@@ -86,7 +46,7 @@ const PhotoModal: React.FC<{ photoUrl: string | null; onClose: () => void }> = (
                 {error && (
                     <div className="text-danger flex flex-col items-center gap-2">
                         <Icon name="error" />
-                        <span>{error}</span>
+                        <span>Failed to load image</span>
                     </div>
                 )}
 

@@ -32,14 +32,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 <select
                     ref={ref}
                     className={cn(
-                        // Base styles
                         'w-full rounded-lg border bg-surface text-text-primary appearance-none cursor-pointer',
                         'transition-all duration-150 ease-in-out',
                         'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-0 focus:border-primary',
                         'disabled:bg-secondary-light disabled:text-text-muted disabled:cursor-not-allowed',
-                        // Size
                         sizeStyles[size],
-                        // States
                         error
                             ? 'border-danger focus:ring-danger focus:border-danger'
                             : 'border-border hover:border-border-hover',
