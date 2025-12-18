@@ -27,7 +27,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, className }) =
                     <Icon name="admin_panel_settings" size="xl" className="text-white" />
                 </div>
                 <Text className="text-2xl font-bold text-text-primary">HRIS Admin</Text>
-                <Text variant="muted" className="mt-1">Human Resource Information System</Text>
+                <Text variant="muted" className="mt-1">HRIS Technical Test Dexa</Text>
             </div>
 
             {/* Card */}
