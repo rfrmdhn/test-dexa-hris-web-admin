@@ -26,7 +26,7 @@ export const AttendancePage: React.FC = () => {
     const [params, setParams] = useState<AttendanceQueryParams>({
         page: 1,
         limit: 10,
-        sortBy: 'checkInTime',
+        sortBy: 'date',
         sortOrder: 'desc',
         startDate: today,
         endDate: today,
@@ -94,7 +94,7 @@ export const AttendancePage: React.FC = () => {
                 total: 0,
                 page: 1,
                 limit: 10,
-                totalPages: 1,
+                lastPage: 1,
             },
         [data]
     );

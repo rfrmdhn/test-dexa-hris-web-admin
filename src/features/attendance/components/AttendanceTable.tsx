@@ -134,13 +134,13 @@ export const AttendanceTable: React.FC<AttendanceTableProps> = ({
             ),
         },
         {
-            key: 'checkInTime',
+            key: 'date',
             header: 'Date',
             sortable: true,
             width: '160px',
             render: (item) => (
                 <span className="text-text-secondary">
-                    {formatDateTime(item.checkInTime).split(' ').slice(0, 3).join(' ')}
+                    {formatDateTime(item.date).split(' ').slice(0, 3).join(' ')}
                 </span>
             ),
         },
@@ -150,7 +150,7 @@ export const AttendanceTable: React.FC<AttendanceTableProps> = ({
             width: '100px',
             render: (item) => (
                 <Badge variant="success" size="sm">
-                    {formatTime(item.checkInTime)}
+                    {formatTime(item.checkIn)}
                 </Badge>
             ),
         },
@@ -159,9 +159,9 @@ export const AttendanceTable: React.FC<AttendanceTableProps> = ({
             header: 'Check Out',
             width: '100px',
             render: (item) =>
-                item.checkOutTime ? (
+                item.checkOut ? (
                     <Badge variant="info" size="sm">
-                        {formatTime(item.checkOutTime)}
+                        {formatTime(item.checkOut)}
                     </Badge>
                 ) : (
                     <Badge variant="warning" size="sm">

@@ -89,7 +89,7 @@ export const EmployeeListPage: React.FC = () => {
                 total: 0,
                 page: 1,
                 limit: 10,
-                totalPages: 1,
+                lastPage: 1,
             },
         [data]
     );
