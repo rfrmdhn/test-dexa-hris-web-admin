@@ -20,18 +20,13 @@ export function useLogin(options?: UseLoginOptions) {
 
     return useMutation({
         mutationFn: async (payload: LoginPayload) => {
-            const response = await authApi.login(payload);
+            const data = await authApi.login(payload);
 
-            if (!response.success) {
-                throw new Error(response.message || 'Login failed');
-            }
-
-            // Verify role is ADMIN
-            if (response.data.user.role !== 'ADMIN') {
+            if (data.user.role !== 'ADMIN') {
                 throw new Error('Access denied. Admin privileges required.');
             }
 
-            return response.data;
+            return data;
         },
         onSuccess: (data) => {
             // Store auth data
