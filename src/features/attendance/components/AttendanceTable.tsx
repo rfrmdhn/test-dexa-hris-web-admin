@@ -9,7 +9,7 @@ import { Badge } from '@/components/atoms/Badge';
 import { Button } from '@/components/atoms/Button';
 import { Icon } from '@/components/atoms/Icon';
 import { Avatar } from '@/components/molecules/Avatar';
-import { formatDateTime, formatTime } from '@/libs/utils';
+import { formatDateTime, formatTime, getAbsolutePhotoUrl } from '@/libs/utils';
 import type { Attendance } from '@/libs/types';
 
 interface AttendanceTableProps {
@@ -25,6 +25,49 @@ const PhotoModal: React.FC<{ photoUrl: string | null; onClose: () => void }> = (
     photoUrl,
     onClose,
 }) => {
+    const [blobUrl, setBlobUrl] = React.useState<string | null>(null);
+    const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState<string | null>(null);
+
+    React.useEffect(() => {
+        if (!photoUrl) return;
+
+        let active = true;
+        const fetchImage = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                // Use fetch with auth header since apiClient might be strictly for JSON API
+                // But we can use apiClient if we set responseType to blob
+                // However, importing apiClient here directly is better
+                const { default: apiClient } = await import('@/libs/api/client');
+
+                const response = await apiClient.get(photoUrl, {
+                    responseType: 'blob'
+                });
+
+                if (active) {
+                    const url = URL.createObjectURL(response.data);
+                    setBlobUrl(url);
+                }
+            } catch (err) {
+                if (active) {
+                    console.error('Failed to load image', err);
+                    setError('Failed to load image');
+                }
+            } finally {
+                if (active) setLoading(false);
+            }
+        };
+
+        fetchImage();
+
+        return () => {
+            active = false;
+            if (blobUrl) URL.revokeObjectURL(blobUrl);
+        };
+    }, [photoUrl]);
+
     if (!photoUrl) return null;
 
     return (
@@ -32,13 +75,30 @@ const PhotoModal: React.FC<{ photoUrl: string | null; onClose: () => void }> = (
             className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
             onClick={onClose}
         >
-            <div className="relative max-w-2xl max-h-[80vh]">
-                <img
-                    src={photoUrl}
-                    alt="Check-in photo"
-                    className="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
-                    onClick={(e) => e.stopPropagation()}
-                />
+            <div className="relative max-w-2xl max-h-[80vh] min-w-[300px] min-h-[200px] bg-surface rounded-lg flex items-center justify-center">
+                {loading && (
+                    <div className="text-primary flex flex-col items-center gap-2">
+                        <Icon name="refresh" className="animate-spin" />
+                        <span>Loading image...</span>
+                    </div>
+                )}
+
+                {error && (
+                    <div className="text-danger flex flex-col items-center gap-2">
+                        <Icon name="error" />
+                        <span>{error}</span>
+                    </div>
+                )}
+
+                {blobUrl && !loading && (
+                    <img
+                        src={blobUrl}
+                        alt="Check-in photo"
+                        className="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    />
+                )}
+
                 <button
                     onClick={onClose}
                     className="absolute -top-3 -right-3 p-2 bg-surface rounded-full shadow-lg hover:bg-secondary-light transition-colors"
@@ -114,19 +174,21 @@ export const AttendanceTable: React.FC<AttendanceTableProps> = ({
             header: 'Photo',
             width: '80px',
             className: 'text-center',
-            render: (item) =>
-                item.photoUrl ? (
+            render: (item) => {
+                const photoUrl = getAbsolutePhotoUrl(item.photoUrl);
+                return photoUrl ? (
                     <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => setPreviewPhoto(item.photoUrl)}
+                        onClick={() => setPreviewPhoto(photoUrl)}
                         title="View photo"
                     >
                         <Icon name="photo_camera" size="sm" className="text-primary" />
                     </Button>
                 ) : (
                     <span className="text-text-muted">-</span>
-                ),
+                );
+            },
         },
     ];
 

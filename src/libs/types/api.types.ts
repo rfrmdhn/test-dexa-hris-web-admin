@@ -81,3 +81,20 @@ export interface LoginResponseData {
   access_token: string;
   user: User;
 }
+
+// Attendance record
+export interface Attendance {
+  id: string;
+  userId: string;
+  checkInTime: string;
+  checkOutTime?: string;
+  photoUrl?: string;
+  user: User;
+}
+
+// Attendance query params
+export interface AttendanceQueryParams extends PaginationParams {
+  userId?: string;
+  startDate?: string;
+  endDate?: string;
+}
