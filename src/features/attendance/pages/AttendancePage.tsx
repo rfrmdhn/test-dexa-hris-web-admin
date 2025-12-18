@@ -94,7 +94,7 @@ export const AttendancePage: React.FC = () => {
                 total: 0,
                 page: 1,
                 limit: 10,
-                lastPage: 1,
+                totalPages: 1,
             },
         [data]
     );

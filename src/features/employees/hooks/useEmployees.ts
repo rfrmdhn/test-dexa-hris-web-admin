@@ -14,15 +14,12 @@ export function useEmployees(params?: EmployeeQueryParams) {
         queryKey: [EMPLOYEES_QUERY_KEY, params],
         queryFn: async () => {
             const response = await employeeApi.getAll(params);
-            if (!response.success) {
-                throw new Error(response.message || 'Failed to fetch employees');
-            }
             return {
                 items: response.data,
                 meta: response.meta,
             };
         },
         placeholderData: keepPreviousData,
-        staleTime: 30 * 1000, // 30 seconds
+        staleTime: 30 * 1000,
     });
 }

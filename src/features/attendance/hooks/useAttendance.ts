@@ -14,15 +14,13 @@ export function useAttendance(params?: AttendanceQueryParams) {
         queryKey: [ATTENDANCE_QUERY_KEY, params],
         queryFn: async () => {
             const response = await attendanceApi.getAll(params);
-            if (!response.success) {
-                throw new Error(response.message || 'Failed to fetch attendance');
-            }
             return {
                 items: response.data,
                 meta: response.meta,
             };
         },
         placeholderData: keepPreviousData,
-        staleTime: 30 * 1000, // 30 seconds
+        staleTime: 30 * 1000,
     });
 }
+

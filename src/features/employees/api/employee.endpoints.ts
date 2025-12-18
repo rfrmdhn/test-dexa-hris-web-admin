@@ -5,63 +5,56 @@
 
 import apiClient from '@/libs/api/client';
 import type {
-    ApiResponse,
-    PaginatedApiResponse,
     Employee,
     EmployeeQueryParams,
     CreateEmployeeDto,
     UpdateEmployeeDto,
 } from '@/libs/types';
 
+interface PaginatedResponse<T> {
+    data: T[];
+    meta: {
+        total: number;
+        page: number;
+        limit: number;
+        totalPages: number;
+    };
+}
+
 export const employeeApi = {
-    /**
-     * Get all employees with pagination and filters
-     */
-    getAll: async (params?: EmployeeQueryParams): Promise<PaginatedApiResponse<Employee>> => {
-        const response = await apiClient.get<PaginatedApiResponse<Employee>>(
+    getAll: async (params?: EmployeeQueryParams): Promise<PaginatedResponse<Employee>> => {
+        const response = await apiClient.get<PaginatedResponse<Employee>>(
             '/employees',
             { params }
         );
         return response.data;
     },
 
-    /**
-     * Get employee by ID
-     */
-    getById: async (id: string): Promise<ApiResponse<Employee>> => {
-        const response = await apiClient.get<ApiResponse<Employee>>(
+    getById: async (id: string): Promise<Employee> => {
+        const response = await apiClient.get<Employee>(
             `/employees/${id}`
         );
         return response.data;
     },
 
-    /**
-     * Create new employee
-     */
-    create: async (data: CreateEmployeeDto): Promise<ApiResponse<Employee>> => {
-        const response = await apiClient.post<ApiResponse<Employee>>(
+    create: async (data: CreateEmployeeDto): Promise<Employee> => {
+        const response = await apiClient.post<Employee>(
             '/employees',
             data
         );
         return response.data;
     },
 
-    /**
-     * Update employee
-     */
-    update: async (id: string, data: UpdateEmployeeDto): Promise<ApiResponse<Employee>> => {
-        const response = await apiClient.patch<ApiResponse<Employee>>(
+    update: async (id: string, data: UpdateEmployeeDto): Promise<Employee> => {
+        const response = await apiClient.patch<Employee>(
             `/employees/${id}`,
             data
         );
         return response.data;
     },
 
-    /**
-     * Delete employee
-     */
-    delete: async (id: string): Promise<ApiResponse<null>> => {
-        const response = await apiClient.delete<ApiResponse<null>>(
+    delete: async (id: string): Promise<Employee> => {
+        const response = await apiClient.delete<Employee>(
             `/employees/${id}`
         );
         return response.data;
