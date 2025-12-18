@@ -1,8 +1,3 @@
-/**
- * AuthLayout Template
- * Centered card layout for authentication pages
- */
-
 import React from 'react';
 import { cn } from '@/libs/utils';
 import { Icon } from '@/components/atoms/Icon';
@@ -21,7 +16,6 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, className }) =
                 'flex flex-col items-center justify-center p-4'
             )}
         >
-            {/* Logo */}
             <div className="mb-8 flex flex-col items-center">
                 <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg mb-4">
                     <Icon name="admin_panel_settings" size="xl" className="text-white" />
@@ -30,7 +24,6 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, className }) =
                 <Text variant="muted" className="mt-1">HRIS Technical Test Dexa</Text>
             </div>
 
-            {/* Card */}
             <div
                 className={cn(
                     'w-full max-w-md bg-surface rounded-2xl shadow-xl p-8',

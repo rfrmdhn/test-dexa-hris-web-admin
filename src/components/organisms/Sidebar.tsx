@@ -1,8 +1,3 @@
-/**
- * Sidebar Organism
- * Navigation sidebar with links and user section
- */
-
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { cn } from '@/libs/utils';
@@ -35,7 +30,6 @@ export const Sidebar: React.FC = () => {
 
     return (
         <aside className="fixed left-0 top-0 h-screen w-[260px] bg-sidebar-bg flex flex-col z-40">
-            {/* Logo */}
             <div className="h-16 flex items-center px-6 border-b border-white/10">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
@@ -45,7 +39,6 @@ export const Sidebar: React.FC = () => {
                 </div>
             </div>
 
-            {/* Navigation */}
             <nav className="flex-1 py-6 px-4 overflow-y-auto">
                 <ul className="space-y-1">
                     {navItems.map((item) => {
@@ -74,7 +67,6 @@ export const Sidebar: React.FC = () => {
                 </ul>
             </nav>
 
-            {/* User section */}
             <div className="p-4 border-t border-white/10">
                 <div className="flex items-center gap-3 p-3 rounded-lg bg-sidebar-hover">
                     <Avatar name={user?.name || 'Admin'} size="sm" />

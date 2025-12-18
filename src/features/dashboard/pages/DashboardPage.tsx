@@ -1,8 +1,3 @@
-/**
- * DashboardPage
- * Main dashboard with quick links
- */
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/templates/DashboardLayout';
@@ -59,7 +54,6 @@ export const DashboardPage: React.FC = () => {
             title="Dashboard"
             subtitle="Welcome back to HRIS Admin"
         >
-            {/* Quick Links */}
             <div className="mb-6">
                 <Heading as="h3" className="mb-4">
                     Quick Actions
@@ -86,7 +80,6 @@ export const DashboardPage: React.FC = () => {
                 </div>
             </div>
 
-            {/* Info Card */}
             <Card variant="outline" className="bg-gradient-to-r from-primary/5 to-transparent">
                 <div className="flex items-center gap-4">
                     <div className="p-3 bg-primary rounded-xl">

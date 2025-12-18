@@ -1,8 +1,3 @@
-/**
- * EmployeeCreatePage
- * Page for creating a new employee
- */
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/templates/DashboardLayout';

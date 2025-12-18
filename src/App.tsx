@@ -1,8 +1,3 @@
-/**
- * App Component
- * Main application with routing configuration
- */
-
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from '@/routes';
 
@@ -21,13 +16,10 @@ import { AttendancePage } from '@/features/attendance/pages';
 function App() {
   return (
     <Routes>
-      {/* Public routes */}
       <Route path="/login" element={<LoginPage />} />
 
-      {/* Redirect root to dashboard */}
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-      {/* Protected routes */}
       <Route
         path="/dashboard"
         element={
@@ -73,7 +65,6 @@ function App() {
         }
       />
 
-      {/* Catch all - redirect to dashboard */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );

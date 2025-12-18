@@ -1,8 +1,3 @@
-/**
- * EmployeeTable Component
- * Table displaying employees with actions
- */
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataTable, type Column } from '@/components/organisms/DataTable';

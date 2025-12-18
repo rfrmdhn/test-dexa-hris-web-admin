@@ -1,9 +1,4 @@
-/**
- * AttendancePage
- * Page for viewing attendance records (VIEW ONLY)
- */
-
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { DashboardLayout } from '@/components/templates/DashboardLayout';
 import { Card } from '@/components/atoms/Card';
 import { Input } from '@/components/atoms/Input';
@@ -15,13 +10,20 @@ import { Pagination } from '@/components/molecules/Pagination';
 import { AttendanceTable } from '@/features/attendance/components';
 import { useAttendance } from '@/features/attendance/hooks';
 import { useEmployees } from '@/features/employees/hooks';
+import { useTableParams } from '@/libs/hooks';
 import { getTodayISO } from '@/libs/utils';
 import type { AttendanceQueryParams } from '@/libs/types';
 
 export const AttendancePage: React.FC = () => {
     const today = getTodayISO();
 
-    const [params, setParams] = useState<AttendanceQueryParams>({
+    const {
+        params,
+        handleSort,
+        handlePageChange,
+        handleLimitChange,
+        setFilter,
+    } = useTableParams<AttendanceQueryParams>({
         page: 1,
         limit: 10,
         sortBy: 'checkInTime',
@@ -45,40 +47,16 @@ export const AttendancePage: React.FC = () => {
     }, [employeesData]);
 
     const handleEmployeeFilter = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        setParams((prev) => ({
-            ...prev,
-            userId: e.target.value || undefined,
-            page: 1,
-        }));
-    }, []);
+        setFilter('userId', e.target.value);
+    }, [setFilter]);
 
     const handleStartDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setParams((prev) => ({
-            ...prev,
-            startDate: e.target.value || undefined,
-            page: 1,
-        }));
-    }, []);
+        setFilter('startDate', e.target.value);
+    }, [setFilter]);
 
     const handleEndDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setParams((prev) => ({
-            ...prev,
-            endDate: e.target.value || undefined,
-            page: 1,
-        }));
-    }, []);
-
-    const handleSort = useCallback((key: string) => {
-        setParams((prev) => ({
-            ...prev,
-            sortBy: key,
-            sortOrder: prev.sortBy === key && prev.sortOrder === 'asc' ? 'desc' : 'asc',
-        }));
-    }, []);
-
-    const handlePageChange = useCallback((page: number) => {
-        setParams((prev) => ({ ...prev, page }));
-    }, []);
+        setFilter('endDate', e.target.value);
+    }, [setFilter]);
 
     const attendance = useMemo(() => data?.items ?? [], [data]);
     const meta = useMemo(
@@ -106,7 +84,6 @@ export const AttendancePage: React.FC = () => {
             }
         >
             <Card>
-                {/* Filters */}
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
                     <div className="flex-1 max-w-xs">
                         <Label htmlFor="employee-filter">Employee</Label>
@@ -143,7 +120,6 @@ export const AttendancePage: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Info banner */}
                 <div className="mb-4 p-3 bg-info-light rounded-lg flex items-center gap-2">
                     <Icon name="info" size="sm" className="text-info" />
                     <Text size="sm" className="text-blue-800">
@@ -151,14 +127,12 @@ export const AttendancePage: React.FC = () => {
                     </Text>
                 </div>
 
-                {/* Error state */}
                 {error && (
                     <div className="p-4 mb-4 bg-danger-light border border-danger/20 rounded-lg text-danger text-sm">
                         {error.message || 'Failed to load attendance'}
                     </div>
                 )}
 
-                {/* Table */}
                 <AttendanceTable
                     attendance={attendance}
                     isLoading={isLoading}
@@ -167,13 +141,12 @@ export const AttendancePage: React.FC = () => {
                     onSort={handleSort}
                 />
 
-                {/* Pagination */}
                 {meta.total > 0 && (
                     <div className="mt-6 pt-6 border-t border-border">
                         <Pagination
                             meta={meta}
                             onPageChange={handlePageChange}
-                            onLimitChange={(limit) => setParams(prev => ({ ...prev, limit, page: 1 }))}
+                            onLimitChange={handleLimitChange}
                         />
                     </div>
                 )}

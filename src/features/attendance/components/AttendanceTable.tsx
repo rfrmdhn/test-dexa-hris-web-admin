@@ -1,8 +1,3 @@
-/**
- * AttendanceTable Component
- * Table displaying attendance records (view-only)
- */
-
 import React, { useState } from 'react';
 import { DataTable, type Column } from '@/components/organisms/DataTable';
 import { Badge } from '@/components/atoms/Badge';
@@ -11,6 +6,7 @@ import { Icon } from '@/components/atoms/Icon';
 import { Avatar } from '@/components/molecules/Avatar';
 import { formatDateTime, formatTime, getAbsolutePhotoUrl } from '@/libs/utils';
 import type { Attendance } from '@/libs/types';
+import { useAttendancePhoto } from '@/features/attendance/hooks/useAttendancePhoto';
 
 interface AttendanceTableProps {
     attendance: Attendance[];
@@ -19,8 +15,6 @@ interface AttendanceTableProps {
     sortOrder?: 'asc' | 'desc';
     onSort?: (key: string) => void;
 }
-
-import { useAttendancePhoto } from '@/features/attendance/hooks/useAttendancePhoto';
 
 const PhotoModal: React.FC<{ photoUrl: string | null; onClose: () => void }> = ({
     photoUrl,

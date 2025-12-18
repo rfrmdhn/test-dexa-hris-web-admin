@@ -1,8 +1,3 @@
-/**
- * EmployeeEditPage
- * Page for editing an existing employee
- */
-
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DashboardLayout } from '@/components/templates/DashboardLayout';

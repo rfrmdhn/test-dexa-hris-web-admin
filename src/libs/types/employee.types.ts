@@ -1,8 +1,3 @@
-/**
- * Employee Types
- * Types for employee CRUD operations
- */
-
 import type { UserRole, UserWithTimestamps, PaginationParams } from './api.types';
 
 export interface Employee extends UserWithTimestamps { }

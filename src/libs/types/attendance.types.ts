@@ -1,8 +1,3 @@
-/**
- * Attendance Types
- * Types for attendance monitoring (view-only)
- */
-
 import type { PaginationParams, User } from './api.types';
 
 export interface Attendance {

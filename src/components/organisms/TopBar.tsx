@@ -1,8 +1,3 @@
-/**
- * TopBar Organism
- * Header bar with page title and actions
- */
-
 import React from 'react';
 import { cn } from '@/libs/utils';
 import { Heading, Text } from '@/components/atoms/Typography';

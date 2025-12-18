@@ -1,8 +1,3 @@
-/**
- * DataTable Organism
- * Generic reusable table with sorting
- */
-
 import React from 'react';
 import { cn } from '@/libs/utils';
 import { Icon } from '@/components/atoms/Icon';

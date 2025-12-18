@@ -1,8 +1,3 @@
-/**
- * API Response Types
- * Standardized API response format matching backend contract
- */
-
 export interface ApiResponse<T> {
   statusCode: number;
   message: string;
@@ -70,5 +65,3 @@ export interface LoginResponseData {
   access_token: string;
   user: User;
 }
-
-

@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createEmployeeSchema, updateEmployeeSchema } from '@/libs/schemas/employee.schema';
 import { FormField } from '@/components/molecules/FormField';
-import { Select, type SelectOption } from '@/components/molecules/Select';
+import { Select } from '@/components/molecules/Select';
 import { Button } from '@/components/atoms/Button';
 import { Icon } from '@/components/atoms/Icon';
 import { Label } from '@/components/atoms/Typography';
 import { Card } from '@/components/atoms/Card';
 import type { Employee, CreateEmployeeDto, UpdateEmployeeDto } from '@/libs/types';
+import { USER_ROLE_OPTIONS } from '@/libs/constants';
 
 interface BaseFormProps {
     onCancel: () => void;
@@ -29,11 +30,6 @@ interface EditFormProps extends BaseFormProps {
 }
 
 type EmployeeFormProps = CreateFormProps | EditFormProps;
-
-const roleOptions: SelectOption[] = [
-    { value: 'EMPLOYEE', label: 'Employee' },
-    { value: 'ADMIN', label: 'Admin' },
-];
 
 export const EmployeeForm: React.FC<EmployeeFormProps> = (props) => {
     const { onCancel, isLoading = false, error: serverError } = props;
@@ -145,7 +141,7 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = (props) => {
                         </Label>
                         <Select
                             id="role"
-                            options={roleOptions}
+                            options={USER_ROLE_OPTIONS}
                             error={!!errors.role}
                             {...register('role')}
                         />

@@ -1,8 +1,3 @@
-/**
- * SearchBar Molecule
- * Search input with icon and debounce support
- */
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { cn } from '@/libs/utils';
 import { useDebounce } from '@/libs/hooks';

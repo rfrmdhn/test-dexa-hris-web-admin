@@ -1,8 +1,3 @@
-/**
- * LoginForm Component
- * Form for admin login with email and password
- */
-
 import React, { useState } from 'react';
 import { FormField } from '@/components/molecules/FormField';
 import { Button } from '@/components/atoms/Button';

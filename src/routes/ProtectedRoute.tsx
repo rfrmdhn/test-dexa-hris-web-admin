@@ -1,8 +1,3 @@
-/**
- * ProtectedRoute Component
- * Route guard that checks authentication and admin role
- */
-
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@/features/auth/stores/useAuthStore';
@@ -43,9 +38,6 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     return <>{children}</>;
 };
 
-/**
- * Loading screen for initial auth check
- */
 export const AuthLoadingScreen: React.FC = () => (
     <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">

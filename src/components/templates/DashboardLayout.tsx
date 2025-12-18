@@ -1,8 +1,3 @@
-/**
- * DashboardLayout Template
- * Layout with sidebar and content area for authenticated pages
- */
-
 import React from 'react';
 import { cn } from '@/libs/utils';
 import { Sidebar } from '@/components/organisms/Sidebar';
