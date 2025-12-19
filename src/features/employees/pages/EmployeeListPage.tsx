@@ -91,13 +91,13 @@ export const EmployeeListPage: React.FC = () => {
                         value={params.search}
                         onChange={handleSearch}
                         placeholder="Search by name or email..."
-                        className="flex-1 max-w-md"
+                        className="flex-1"
                     />
                     <Select
                         value={params.role ?? ''}
                         onChange={handleRoleFilter}
                         options={ROLE_FILTER_OPTIONS}
-                        className="w-40"
+                        className="w-full sm:w-40 shrink-0"
                     />
                 </div>
 

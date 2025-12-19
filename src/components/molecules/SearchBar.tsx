@@ -44,7 +44,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }, [onChange]);
 
     return (
-        <div className={cn('relative', className)}>
+        <div className={cn('relative w-full', className)}>
             <Input
                 type="text"
                 value={internalValue}
