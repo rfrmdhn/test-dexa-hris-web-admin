@@ -4,7 +4,7 @@ import { ProtectedRoute } from '@/routes';
 import { ToastContainer } from '@/components/molecules/Toast';
 import { employeeListLoader, employeeDetailLoader, attendanceListLoader, loginLoader } from './loaders';
 
-// Lazy load pages directly
+
 const LoginPage = async () => {
     const { LoginPage } = await import('@/features/auth/pages');
     return { Component: LoginPage };

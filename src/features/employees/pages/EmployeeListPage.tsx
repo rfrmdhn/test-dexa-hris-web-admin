@@ -49,7 +49,7 @@ export const EmployeeListPage: React.FC = () => {
         onError: (err) => {
             console.error('Delete failed:', err);
             setDeleteTarget(null);
-            // Error toast is handled globally by client.ts, but we can add specific logic here if needed.
+
         },
     });
 
