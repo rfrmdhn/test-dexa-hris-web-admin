@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '@/components/templates/DashboardLayout';
 import { Card } from '@/components/atoms/Card';
-import { Button } from '@/components/atoms/Button';
 import { Icon } from '@/components/atoms/Icon';
 import { Heading, Text } from '@/components/atoms/Typography';
 
@@ -80,25 +79,7 @@ export const DashboardPage: React.FC = () => {
                 </div>
             </div>
 
-            <Card variant="outline" className="bg-gradient-to-r from-primary/5 to-transparent">
-                <div className="flex items-center gap-4">
-                    <div className="p-3 bg-primary rounded-xl">
-                        <Icon name="info" className="text-white" />
-                    </div>
-                    <div className="flex-1">
-                        <Heading as="h4" className="mb-1">
-                            HRIS Admin Panel
-                        </Heading>
-                        <Text size="sm" variant="muted">
-                            This dashboard allows you to manage employees and monitor attendance.
-                            Employees submit their attendance through the Employee Portal app.
-                        </Text>
-                    </div>
-                    <Button variant="ghost" onClick={() => window.open('https://github.com', '_blank')}>
-                        Learn More
-                    </Button>
-                </div>
-            </Card>
+
         </DashboardLayout>
     );
 };
