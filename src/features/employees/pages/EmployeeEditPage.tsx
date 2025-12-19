@@ -7,6 +7,7 @@ import { Spinner } from '@/components/atoms/Spinner';
 import { Text } from '@/components/atoms/Typography';
 import { EmployeeForm } from '@/features/employees/components';
 import { useEmployee, useUpdateEmployee } from '@/features/employees/hooks';
+import { useToastStore } from '@/stores/useToastStore';
 import type { UpdateEmployeeDto } from '@/libs/types';
 
 export const EmployeeEditPage: React.FC = () => {
@@ -16,7 +17,17 @@ export const EmployeeEditPage: React.FC = () => {
 
     const { data: employee, isLoading: isFetching, error: fetchError } = useEmployee(id);
 
+    const { addToast } = useToastStore();
+
     const { mutate: updateEmployee, isPending: isUpdating } = useUpdateEmployee({
+        onSuccess: () => {
+            addToast({
+                type: 'success',
+                title: 'Employee Updated',
+                message: 'Employee details have been successfully updated.',
+            });
+            navigate('/employees');
+        },
         onError: (err) => {
             setError(err.message || 'Failed to update employee');
         },

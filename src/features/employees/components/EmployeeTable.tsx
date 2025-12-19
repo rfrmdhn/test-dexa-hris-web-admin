@@ -27,7 +27,7 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({
 }) => {
     const navigate = useNavigate();
 
-    const columns: Column<Employee>[] = [
+    const columns: Column<Employee>[] = React.useMemo(() => [
         {
             key: 'name',
             header: 'Employee',
@@ -75,6 +75,7 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({
                         size="sm"
                         onClick={() => navigate(`/employees/${employee.id}/edit`)}
                         title="Edit employee"
+                        aria-label={`Edit ${employee.name}`}
                     >
                         <Icon name="edit" size="sm" />
                     </Button>
@@ -84,13 +85,14 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({
                         onClick={() => onDelete?.(employee)}
                         title="Delete employee"
                         className="text-danger hover:bg-danger-light"
+                        aria-label={`Delete ${employee.name}`}
                     >
                         <Icon name="delete" size="sm" />
                     </Button>
                 </div>
             ),
         },
-    ];
+    ], [navigate, onDelete]);
 
     return (
         <DataTable

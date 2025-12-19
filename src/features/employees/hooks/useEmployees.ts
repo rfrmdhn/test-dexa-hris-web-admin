@@ -1,17 +1,11 @@
-/**
- * useEmployees Hook
- * React Query hook for employee list with pagination
- */
-
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { employeeApi } from '@/features/employees/api';
 import type { EmployeeQueryParams } from '@/libs/types';
-
-export const EMPLOYEES_QUERY_KEY = 'employees';
+import { queryKeys } from '@/libs/constants/queryKeys';
 
 export function useEmployees(params?: EmployeeQueryParams) {
     return useQuery({
-        queryKey: [EMPLOYEES_QUERY_KEY, params],
+        queryKey: queryKeys.employees.list(params ?? {}),
         queryFn: async () => {
             const response = await employeeApi.getAll(params);
             return {

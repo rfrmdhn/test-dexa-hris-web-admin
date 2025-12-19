@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ProtectedRoute } from '@/routes';
+import { ToastContainer } from '@/components/molecules/Toast';
 
 import { LoginPage } from '@/features/auth/pages';
 
@@ -15,58 +16,61 @@ import { AttendancePage } from '@/features/attendance/pages';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
+    <>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
 
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <DashboardPage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-        path="/employees"
-        element={
-          <ProtectedRoute>
-            <EmployeeListPage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/employees"
+          element={
+            <ProtectedRoute>
+              <EmployeeListPage />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-        path="/employees/create"
-        element={
-          <ProtectedRoute>
-            <EmployeeCreatePage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/employees/create"
+          element={
+            <ProtectedRoute>
+              <EmployeeCreatePage />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-        path="/employees/:id/edit"
-        element={
-          <ProtectedRoute>
-            <EmployeeEditPage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/employees/:id/edit"
+          element={
+            <ProtectedRoute>
+              <EmployeeEditPage />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route
-        path="/attendance"
-        element={
-          <ProtectedRoute>
-            <AttendancePage />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/attendance"
+          element={
+            <ProtectedRoute>
+              <AttendancePage />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 

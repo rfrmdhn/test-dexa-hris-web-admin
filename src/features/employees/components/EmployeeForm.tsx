@@ -58,7 +58,7 @@ export const EmployeeForm: React.FC<EmployeeFormProps> = (props) => {
             reset({
                 email: props.employee.email,
                 name: props.employee.name,
-                role: props.employee.role as any,
+                role: props.employee.role,
                 password: '',
             });
         }

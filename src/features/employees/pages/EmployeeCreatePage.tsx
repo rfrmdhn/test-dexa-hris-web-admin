@@ -5,13 +5,24 @@ import { Button } from '@/components/atoms/Button';
 import { Icon } from '@/components/atoms/Icon';
 import { EmployeeForm } from '@/features/employees/components';
 import { useCreateEmployee } from '@/features/employees/hooks';
+import { useToastStore } from '@/stores/useToastStore';
 import type { CreateEmployeeDto } from '@/libs/types';
 
 export const EmployeeCreatePage: React.FC = () => {
     const navigate = useNavigate();
     const [error, setError] = useState<string | null>(null);
 
+    const { addToast } = useToastStore();
+
     const { mutate: createEmployee, isPending } = useCreateEmployee({
+        onSuccess: () => {
+            addToast({
+                type: 'success',
+                title: 'Employee Created',
+                message: 'New employee has been successfully added.',
+            });
+            navigate('/employees');
+        },
         onError: (err) => {
             setError(err.message || 'Failed to create employee');
         },

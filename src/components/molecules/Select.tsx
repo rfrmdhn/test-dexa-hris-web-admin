@@ -42,6 +42,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                             : 'border-border hover:border-border-hover',
                         className
                     )}
+                    aria-invalid={error}
+                    aria-required={props.required}
                     disabled={disabled}
                     {...props}
                 >

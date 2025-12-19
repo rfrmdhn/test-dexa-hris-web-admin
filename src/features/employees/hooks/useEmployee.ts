@@ -1,15 +1,10 @@
-/**
- * useEmployee Hook
- * React Query hook for single employee
- */
-
 import { useQuery } from '@tanstack/react-query';
 import { employeeApi } from '@/features/employees/api';
-import { EMPLOYEES_QUERY_KEY } from './useEmployees';
+import { queryKeys } from '@/libs/constants/queryKeys';
 
 export function useEmployee(id: string | undefined) {
     return useQuery({
-        queryKey: [EMPLOYEES_QUERY_KEY, id],
+        queryKey: queryKeys.employees.detail(id ?? ''),
         queryFn: async () => {
             if (!id) throw new Error('Employee ID is required');
             return employeeApi.getById(id);
