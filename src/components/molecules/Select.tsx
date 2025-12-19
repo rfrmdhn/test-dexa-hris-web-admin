@@ -25,7 +25,7 @@ const sizeStyles: Record<NonNullable<SelectProps['size']>, string> = {
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     ({ options, size = 'md', error, placeholder, className, disabled, ...props }, ref) => {
         return (
-            <div className="relative w-full">
+            <div className={cn('relative', className)}>
                 <select
                     ref={ref}
                     className={cn(
@@ -36,8 +36,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                         sizeStyles[size],
                         error
                             ? 'border-danger focus:ring-danger focus:border-danger'
-                            : 'border-border hover:border-border-hover',
-                        className
+                            : 'border-border hover:border-border-hover'
                     )}
                     aria-invalid={error}
                     aria-required={props.required}
