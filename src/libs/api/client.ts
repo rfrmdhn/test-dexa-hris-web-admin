@@ -26,7 +26,7 @@ const setupInterceptors = (instance: typeof apiClient) => {
             const { logout } = useAuthStore.getState();
             const { addToast } = useToastStore.getState();
 
-            // Handle 401 Unauthorized
+
             if (err.response?.status === 401) {
                 logout();
                 addToast({
