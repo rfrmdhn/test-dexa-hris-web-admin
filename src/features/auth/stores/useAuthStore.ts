@@ -1,7 +1,4 @@
-/**
- * Auth Store
- * Zustand store for authentication state
- */
+
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';

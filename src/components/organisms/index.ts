@@ -1,6 +1,4 @@
-/**
- * Organisms barrel export
- */
+
 
 export { Sidebar } from './Sidebar';
 

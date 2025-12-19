@@ -1,7 +1,4 @@
-/**
- * Spinner Atom
- * Loading spinner component with sizes
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

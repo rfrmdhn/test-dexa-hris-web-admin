@@ -1,7 +1,4 @@
-/**
- * Employee API Endpoints
- * API functions for employee CRUD operations
- */
+
 
 import apiClient from '@/libs/api/client';
 import type {

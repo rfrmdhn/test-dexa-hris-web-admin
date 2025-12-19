@@ -1,7 +1,4 @@
-/**
- * Typography Atoms
- * Heading and Text components for consistent typography
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

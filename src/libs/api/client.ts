@@ -26,7 +26,7 @@ const setupInterceptors = (instance: typeof apiClient) => {
             const { logout } = useAuthStore.getState();
             const { addToast } = useToastStore.getState();
 
-            // Handle 401 Unauthorized
+
             if (err.response?.status === 401) {
                 logout();
                 addToast({
@@ -35,7 +35,6 @@ const setupInterceptors = (instance: typeof apiClient) => {
                     message: 'Please log in again.',
                 });
             }
-            // Handle 403 Forbidden
             else if (err.response?.status === 403) {
                 addToast({
                     type: 'error',
@@ -43,7 +42,6 @@ const setupInterceptors = (instance: typeof apiClient) => {
                     message: 'You do not have permission to perform this action.',
                 });
             }
-            // Handle 500 Server Error
             else if (err.response?.status >= 500) {
                 addToast({
                     type: 'error',

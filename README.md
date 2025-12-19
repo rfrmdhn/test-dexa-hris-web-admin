@@ -82,11 +82,13 @@ The build artifacts will be stored in the `dist/` directory.
 
 ```
 src/
+├── assets/         # Static assets (images, fonts, etc.)
 ├── components/     # Atomic design components (atoms, molecules, organisms, templates)
 ├── features/       # Feature-based modules (auth, employees, attendance, dashboard)
 ├── libs/           # Shared utilities, hooks, constants, types, and API client
 ├── routes/         # Route definitions and guarded routes
-└── App.tsx         # Main application component
+├── stores/         # Global state management (Zustand)
+└── main.tsx        # Main application entry point
 ```
 
 ## Linting

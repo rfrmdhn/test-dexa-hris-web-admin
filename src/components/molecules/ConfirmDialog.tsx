@@ -1,7 +1,4 @@
-/**
- * ConfirmDialog Molecule
- * Modal dialog for confirming destructive actions
- */
+
 
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/libs/utils';

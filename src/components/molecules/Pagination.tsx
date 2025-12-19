@@ -1,7 +1,4 @@
-/**
- * Pagination Molecule
- * Page navigation with prev/next and page numbers
- */
+
 
 import React, { useMemo } from 'react';
 import { cn } from '@/libs/utils';

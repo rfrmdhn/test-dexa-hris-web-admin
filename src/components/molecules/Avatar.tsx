@@ -1,7 +1,4 @@
-/**
- * Avatar Molecule
- * User avatar with initials fallback
- */
+
 
 import React, { useMemo } from 'react';
 import { cn } from '@/libs/utils';

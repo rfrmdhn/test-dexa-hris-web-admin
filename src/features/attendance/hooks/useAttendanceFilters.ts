@@ -1,7 +1,4 @@
-/**
- * useAttendanceFilters Hook
- * Manages filter state and logic for the Attendance page
- */
+
 
 import { useMemo, useCallback } from 'react';
 import { useEmployees } from '@/features/employees/hooks';
@@ -28,7 +25,7 @@ export function useAttendanceFilters() {
         endDate: today,
     });
 
-    // Fetch employees for the filter dropdown
+
     const { data: employeesData } = useEmployees({ limit: 100 });
 
     const employeeOptions: SelectOption[] = useMemo(() => {

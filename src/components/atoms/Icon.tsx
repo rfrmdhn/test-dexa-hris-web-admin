@@ -1,7 +1,4 @@
-/**
- * Icon Atom
- * Wrapper for Material Symbols icons
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

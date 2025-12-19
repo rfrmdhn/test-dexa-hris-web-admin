@@ -1,7 +1,4 @@
-/**
- * Input Atom
- * Text input component with validation states and icons
- */
+
 
 import React, { forwardRef } from 'react';
 import { cn } from '@/libs/utils';
