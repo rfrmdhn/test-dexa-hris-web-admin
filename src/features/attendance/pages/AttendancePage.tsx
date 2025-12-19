@@ -1,62 +1,27 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { DashboardLayout } from '@/components/templates/DashboardLayout';
 import { Card } from '@/components/atoms/Card';
 import { Input } from '@/components/atoms/Input';
 import { Icon } from '@/components/atoms/Icon';
-import { Label, Text } from '@/components/atoms/Typography';
-import { Badge } from '@/components/atoms/Badge';
-import { Select, type SelectOption } from '@/components/molecules/Select';
+import { Label } from '@/components/atoms/Typography';
+import { Select } from '@/components/molecules/Select';
 import { Pagination } from '@/components/molecules/Pagination';
 import { AttendanceTable } from '@/features/attendance/components';
-import { useAttendance } from '@/features/attendance/hooks';
-import { useEmployees } from '@/features/employees/hooks';
-import { useTableParams } from '@/libs/hooks';
-import { getTodayISO } from '@/libs/utils';
-import type { AttendanceQueryParams } from '@/libs/types';
+import { useAttendance, useAttendanceFilters } from '@/features/attendance/hooks';
 
 export const AttendancePage: React.FC = () => {
-    const today = getTodayISO();
-
     const {
         params,
+        employeeOptions,
         handleSort,
         handlePageChange,
         handleLimitChange,
-        setFilter,
-    } = useTableParams<AttendanceQueryParams>({
-        page: 1,
-        limit: 10,
-        sortBy: 'checkInTime',
-        sortOrder: 'desc',
-        startDate: today,
-        endDate: today,
-    });
+        handleEmployeeFilter,
+        handleStartDateChange,
+        handleEndDateChange,
+    } = useAttendanceFilters();
 
     const { data, isLoading, error } = useAttendance(params);
-
-    const { data: employeesData } = useEmployees({ limit: 100 });
-
-    const employeeOptions: SelectOption[] = useMemo(() => {
-        const options: SelectOption[] = [{ value: '', label: 'All Employees' }];
-        if (employeesData?.items) {
-            employeesData.items.forEach((emp) => {
-                options.push({ value: emp.id, label: emp.name });
-            });
-        }
-        return options;
-    }, [employeesData]);
-
-    const handleEmployeeFilter = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-        setFilter('userId', e.target.value);
-    }, [setFilter]);
-
-    const handleStartDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setFilter('startDate', e.target.value);
-    }, [setFilter]);
-
-    const handleEndDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setFilter('endDate', e.target.value);
-    }, [setFilter]);
 
     const attendance = useMemo(() => data?.items ?? [], [data]);
     const meta = useMemo(
@@ -73,15 +38,7 @@ export const AttendancePage: React.FC = () => {
     return (
         <DashboardLayout
             title="Attendance Monitoring"
-            subtitle={
-                <span className="flex items-center gap-2">
-                    <span>{meta.total} records</span>
-                    <Badge variant="info" size="sm">
-                        <Icon name="visibility" size="sm" className="mr-1" />
-                        View Only
-                    </Badge>
-                </span>
-            }
+            subtitle={`${meta.total} records`}
         >
             <Card>
                 <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -118,13 +75,6 @@ export const AttendancePage: React.FC = () => {
                             />
                         </div>
                     </div>
-                </div>
-
-                <div className="mb-4 p-3 bg-info-light rounded-lg flex items-center gap-2">
-                    <Icon name="info" size="sm" className="text-info" />
-                    <Text size="sm" className="text-blue-800">
-                        Attendance records are view-only. Employees submit attendance through the Employee Portal.
-                    </Text>
                 </div>
 
                 {error && (
