@@ -12,6 +12,7 @@ import { EmployeeTable } from '@/features/employees/components';
 import { useEmployees, useDeleteEmployee } from '@/features/employees/hooks';
 import { useTableParams } from '@/libs/hooks';
 import type { Employee, EmployeeQueryParams } from '@/libs/types';
+import { useToastStore } from '@/stores/useToastStore';
 import { ROLE_FILTER_OPTIONS } from '@/libs/constants';
 
 export const EmployeeListPage: React.FC = () => {
@@ -35,11 +36,20 @@ export const EmployeeListPage: React.FC = () => {
 
     const { data, isLoading, error } = useEmployees(params);
 
+    const { addToast } = useToastStore();
     const { mutate: deleteEmployee, isPending: isDeleting } = useDeleteEmployee({
-        onSuccess: () => setDeleteTarget(null),
+        onSuccess: () => {
+            setDeleteTarget(null);
+            addToast({
+                type: 'success',
+                title: 'Employee Deleted',
+                message: 'The employee has been successfully removed.',
+            });
+        },
         onError: (err) => {
             console.error('Delete failed:', err);
             setDeleteTarget(null);
+            // Error toast is handled globally by client.ts, but we can add specific logic here if needed.
         },
     });
 
