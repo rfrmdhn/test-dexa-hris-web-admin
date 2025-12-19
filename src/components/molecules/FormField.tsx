@@ -1,7 +1,4 @@
-/**
- * FormField Molecule
- * Composition of Label + Input + Error message
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

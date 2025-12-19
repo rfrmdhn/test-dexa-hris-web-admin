@@ -1,7 +1,4 @@
-/**
- * Select Molecule
- * Dropdown select component
- */
+
 
 import React, { forwardRef } from 'react';
 import { cn } from '@/libs/utils';

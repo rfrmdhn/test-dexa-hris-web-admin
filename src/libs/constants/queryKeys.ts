@@ -1,7 +1,4 @@
-/**
- * React Query Keys
- * Centralized query keys to avoid hardcoding strings and ensure consistency.
- */
+
 
 export const queryKeys = {
     auth: {

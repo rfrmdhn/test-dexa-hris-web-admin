@@ -1,6 +1,4 @@
-/**
- * Card atom - updated to use cn utility
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

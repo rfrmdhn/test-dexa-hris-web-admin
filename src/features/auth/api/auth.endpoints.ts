@@ -1,7 +1,4 @@
-/**
- * Auth API Endpoints
- * API functions for authentication
- */
+
 
 import apiClient from '@/libs/api/client';
 import type { LoginPayload, LoginResponseData } from '@/libs/types';

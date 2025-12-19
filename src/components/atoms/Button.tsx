@@ -1,7 +1,4 @@
-/**
- * Button Atom
- * Reusable button component with variants, sizes, and loading state
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

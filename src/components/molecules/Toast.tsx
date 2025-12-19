@@ -1,7 +1,4 @@
-/**
- * Toast Component
- * Displays toast notifications from the global store
- */
+
 
 import React from 'react';
 import { createPortal } from 'react-dom';

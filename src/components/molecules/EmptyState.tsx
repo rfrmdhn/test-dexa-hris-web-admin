@@ -1,7 +1,4 @@
-/**
- * EmptyState Molecule
- * Placeholder for empty data states
- */
+
 
 import React from 'react';
 import { cn } from '@/libs/utils';

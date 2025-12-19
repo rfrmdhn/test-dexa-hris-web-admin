@@ -1,7 +1,4 @@
-/**
- * useAttendance Hook
- * React Query hook for attendance list with filters
- */
+
 
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { attendanceApi } from '@/features/attendance/api';

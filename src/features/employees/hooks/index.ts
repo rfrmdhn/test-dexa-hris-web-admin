@@ -1,6 +1,4 @@
-/**
- * Employee hooks barrel export
- */
+
 
 export { useEmployees } from './useEmployees';
 export { useEmployee } from './useEmployee';

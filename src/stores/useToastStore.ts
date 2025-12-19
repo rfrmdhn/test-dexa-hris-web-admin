@@ -1,7 +1,4 @@
-/**
- * Toast Store
- * Global state management for toast notifications
- */
+
 
 import { create } from 'zustand';
 
